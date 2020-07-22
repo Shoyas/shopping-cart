@@ -25,11 +25,11 @@
 
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="addByMinus" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="counter" type="text" class="form-control text-center" value="1">
+                           <button id="addByPlus" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
-                        <h5>$1219</h5>
+                        <h5>$ <span id="costOfPhone">1219</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -77,6 +77,48 @@
          </div>
       </div>
    </section>
+
+   <script>
+      const clickPlus = document.getElementById("addByPlus");
+      clickPlus.addEventListener('click', function(){
+         const numberOfPhone = document.getElementById("counter").value;
+         const numberOfPhoneNumber = parseFloat(numberOfPhone);
+         const totalPhone = numberOfPhoneNumber + 1;
+         
+         document.getElementById("counter").value = totalPhone;
+  
+         const phoneAmount = document.getElementById("costOfPhone").innerText;
+         const phoneAmountNumber = parseFloat(phoneAmount);
+         const totalPrice = phoneAmountNumber + 1219;
+
+         document.getElementById("costOfPhone").innerText = totalPrice;
+
+      })
+
+      const clickMinus = document.getElementById("addByMinus");
+      clickMinus.addEventListener('click', function(){
+         const numberOfPhone = document.getElementById("counter").value;
+         const numberOfPhoneNumber = parseFloat(numberOfPhone);
+         const totalPhone = numberOfPhoneNumber - 1;
+         
+         if(totalPhone == 0){
+            return totalPhone = 0;
+         }
+         else{
+            document.getElementById("counter").value = totalPhone;
+         }
+         
+         const phoneAmount = document.getElementById("costOfPhone").innerText;
+         const phoneAmountNumber = parseFloat(phoneAmount);
+         const totalPrice = phoneAmountNumber - 1219;
+
+         document.getElementById("costOfPhone").innerText = totalPrice;
+         
+
+      })
+
+   </script>
+
 </body>
 
 </html>
