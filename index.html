@@ -16,7 +16,7 @@
       <div class="container">
          <div class="cart">
             <div class="col-md-12 col-lg-10 mx-auto">
-               <div class="cart-item">
+               <div id="firstCart" class="cart-item">
                   <div class="row">
                      <div class="col-md-7 center-item">
                         <img src="images/product-1.png" alt="">
@@ -30,7 +30,7 @@
                            <button id="addByPlus" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
                         <h5>$ <span id="costOfPhone">1219</span></h5>
-                        <img src="images/remove.png" alt="" class="remove-item">
+                        <img id="addCross" src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
                </div>
@@ -79,6 +79,8 @@
    </section>
 
    <script>
+
+      // First Cart event handler
       const clickPlus = document.getElementById("addByPlus");
       clickPlus.addEventListener('click', function(){
          const numberOfPhone = document.getElementById("counter").value;
@@ -116,6 +118,19 @@
          
 
       })
+      
+      const clickCross = document.getElementById("addCross");
+      clickCross.addEventListener('click', function(){
+         const cartRemove = document.getElementById("firstCart");
+         cartRemove.style.display = "none";
+      })
+
+
+      // Second Cart event handler
+
+
+
+
 
    </script>
 
