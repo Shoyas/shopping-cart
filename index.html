@@ -35,7 +35,7 @@
                   </div>
                </div>
 
-               <div class="cart-item">
+               <div id="secondCart" class="cart-item">
                   <div class="row">
                      <div class="col-md-7 center-item mx-auto">
                         <img src="images/product-2.png" alt="">
@@ -43,13 +43,13 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="addMinus2" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="counter2" type="text" class="form-control text-center" value="1">
+                           <button id="addPlus2" class="btn btn-default"><i class="fas fa-plus"></i></button>
 
                         </div>
-                        <h5>$59</h5>
-                        <img src="images/remove.png" alt="" class="remove-item">
+                        <h5>$ <span id="amountOfPhoneCover">59</span></h5>
+                        <img id="addCross2" src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
                </div>
@@ -64,7 +64,7 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$1,278</h5>
+                        <h5>$ <span id="subTotalAmount">1278</span></h5>
                         <h5>$0</h5>
                         <h5>$1,278</h5>
                      </div>
@@ -95,6 +95,15 @@
 
          document.getElementById("costOfPhone").innerText = totalPrice;
 
+         const subTotal = document.getElementById("subTotalAmount").innerText;
+         const subTotalNumber = parseFloat(subTotal);
+         const totalSubTotalAmount = subTotalNumber + 1219;
+         
+         document.getElementById("subTotalAmount").innerText = totalSubTotalAmount;
+
+         
+         
+
       })
 
       const clickMinus = document.getElementById("addByMinus");
@@ -115,6 +124,11 @@
          const totalPrice = phoneAmountNumber - 1219;
 
          document.getElementById("costOfPhone").innerText = totalPrice;
+
+         
+         
+         
+         
          
 
       })
@@ -127,6 +141,51 @@
 
 
       // Second Cart event handler
+
+      const clickPlus2 = document.getElementById("addPlus2");
+      clickPlus2.addEventListener('click', function(){
+         const phoneCover = document.getElementById("counter2").value;
+         const phoneCoverNumber = parseFloat(phoneCover);
+         const totalPhoneCover = phoneCoverNumber + 1;
+
+         document.getElementById("counter2").value = totalPhoneCover;
+
+         const phoneCoverAmount = document.getElementById("amountOfPhoneCover").innerText;
+         const phoneCoverAmountNumber = parseFloat(phoneCoverAmount);
+         const totalCoverAmount = phoneCoverAmountNumber + 59;
+         
+         document.getElementById("amountOfPhoneCover").innerText = totalCoverAmount;
+      })
+
+      const clickMinus2 = document.getElementById("addMinus2");
+      clickMinus2.addEventListener('click', function(){
+         const phoneCover = document.getElementById("counter2").value;
+         const phoneCoverNumber = parseFloat(phoneCover);
+         const totalPhoneCover = phoneCoverNumber - 1;
+
+         if(totalPhoneCover == 0){
+            return totalPhoneCover = 0;
+         }
+         else{
+            document.getElementById("counter2").value = totalPhoneCover;
+         }
+
+         const phoneCoverAmount = document.getElementById("amountOfPhoneCover").innerText;
+         const phoneCoverAmountNumber = parseFloat(phoneCoverAmount);
+         const totalCoverAmount = phoneCoverAmountNumber - 59;
+         
+         document.getElementById("amountOfPhoneCover").innerText = totalCoverAmount;
+         
+      })
+
+      const addCross = document.getElementById("addCross2");
+      addCross.addEventListener('click', function(){
+         const cartRemove = document.getElementById("secondCart");
+         cartRemove.style.display = "none";
+      })
+
+      
+
 
 
 
