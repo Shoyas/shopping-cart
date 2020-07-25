@@ -25,9 +25,9 @@
 
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button id="addByMinus" class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input id="counter" type="text" class="form-control text-center" value="1">
-                           <button id="addByPlus" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="phone-decrease" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="phone-count" type="text" class="form-control text-center" value="1">
+                           <button id="phone-increase" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
                         <h5>$ <span id="costOfPhone">1219</span></h5>
                         <img id="addCross" src="images/remove.png" alt="" class="remove-item">
@@ -43,12 +43,12 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button id="addMinus2" class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input id="counter2" type="text" class="form-control text-center" value="1">
-                           <button id="addPlus2" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="case-decrease" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="case-count" type="text" class="form-control text-center" value="1">
+                           <button id="case-increase" class="btn btn-default"><i class="fas fa-plus"></i></button>
 
                         </div>
-                        <h5>$ <span id="amountOfPhoneCover">59</span></h5>
+                        <h5>$ <span id="case-total">59</span></h5>
                         <img id="addCross2" src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -65,8 +65,8 @@
 
                      <div class="col-md-4 status">
                         <h5>$ <span id="subTotalAmount">1278</span></h5>
-                        <h5>$0</h5>
-                        <h5>$1,278</h5>
+                        <h5>$ <span id="tax"> 64</span></h5>
+                        <h5>$ <span id="finalTotalAmount">1342</span></h5>
                      </div>
                   </div>
                </div>
@@ -80,114 +80,54 @@
 
    <script>
 
-      // First Cart event handler
-      const clickPlus = document.getElementById("addByPlus");
-      clickPlus.addEventListener('click', function(){
-         const numberOfPhone = document.getElementById("counter").value;
-         const numberOfPhoneNumber = parseFloat(numberOfPhone);
-         const totalPhone = numberOfPhoneNumber + 1;
-         
-         document.getElementById("counter").value = totalPhone;
-  
-         const phoneAmount = document.getElementById("costOfPhone").innerText;
-         const phoneAmountNumber = parseFloat(phoneAmount);
-         const totalPrice = phoneAmountNumber + 1219;
-
-         document.getElementById("costOfPhone").innerText = totalPrice;
-
-         const subTotal = document.getElementById("subTotalAmount").innerText;
-         const subTotalNumber = parseFloat(subTotal);
-         const totalSubTotalAmount = subTotalNumber + 1219;
-         
-         document.getElementById("subTotalAmount").innerText = totalSubTotalAmount;
-
-         
-         
-
+      // Handle phone count
+      document.getElementById("phone-increase").addEventListener('click', function(){
+         handlePhoneChange(true);
       })
 
-      const clickMinus = document.getElementById("addByMinus");
-      clickMinus.addEventListener('click', function(){
-         const numberOfPhone = document.getElementById("counter").value;
-         const numberOfPhoneNumber = parseFloat(numberOfPhone);
-         const totalPhone = numberOfPhoneNumber - 1;
-         
-         if(totalPhone == 0){
-            return totalPhone = 0;
+      document.getElementById("phone-decrease").addEventListener('click', function(){
+         handlePhoneChange(false);
+      })
+
+      function handlePhoneChange(isIncrease){
+         const phoneInput = document.getElementById("phone-count");
+         const phoneCount = parseInt(phoneInput.value);
+         let totalPhone = phoneCount;
+         if(isIncrease == true){
+            totalPhone = phoneCount + 1;
          }
-         else{
-            document.getElementById("counter").value = totalPhone;
+         else if(isIncrease == false && phoneCount > 0){
+            totalPhone = phoneCount - 1;
          }
-         
-         const phoneAmount = document.getElementById("costOfPhone").innerText;
-         const phoneAmountNumber = parseFloat(phoneAmount);
-         const totalPrice = phoneAmountNumber - 1219;
+         phoneInput.value = totalPhone;
+         const totalPhoneAmount = totalPhone * 1219;
+         document.getElementById("costOfPhone").innerText = totalPhoneAmount;
+      }
 
-         document.getElementById("costOfPhone").innerText = totalPrice;
 
-         
-         
-         
-         
-         
-
-      })
-      
-      const clickCross = document.getElementById("addCross");
-      clickCross.addEventListener('click', function(){
-         const cartRemove = document.getElementById("firstCart");
-         cartRemove.style.display = "none";
+      //handle case count
+      document.getElementById("case-increase").addEventListener('click', function(){
+         handleProductChange(true);
       })
 
-
-      // Second Cart event handler
-
-      const clickPlus2 = document.getElementById("addPlus2");
-      clickPlus2.addEventListener('click', function(){
-         const phoneCover = document.getElementById("counter2").value;
-         const phoneCoverNumber = parseFloat(phoneCover);
-         const totalPhoneCover = phoneCoverNumber + 1;
-
-         document.getElementById("counter2").value = totalPhoneCover;
-
-         const phoneCoverAmount = document.getElementById("amountOfPhoneCover").innerText;
-         const phoneCoverAmountNumber = parseFloat(phoneCoverAmount);
-         const totalCoverAmount = phoneCoverAmountNumber + 59;
-         
-         document.getElementById("amountOfPhoneCover").innerText = totalCoverAmount;
+      document.getElementById("case-decrease").addEventListener('click', function(){
+         handleProductChange(false);
       })
 
-      const clickMinus2 = document.getElementById("addMinus2");
-      clickMinus2.addEventListener('click', function(){
-         const phoneCover = document.getElementById("counter2").value;
-         const phoneCoverNumber = parseFloat(phoneCover);
-         const totalPhoneCover = phoneCoverNumber - 1;
-
-         if(totalPhoneCover == 0){
-            return totalPhoneCover = 0;
+      function handleProductChange(isIncrease){
+         const caseInput = document.getElementById("case-count");
+         const caseCount = parseInt(caseInput.value);
+         let caseNewCount = caseCount;
+         if(isIncrease == true){
+            caseNewCount = caseCount + 1;
          }
-         else{
-            document.getElementById("counter2").value = totalPhoneCover;
+         else if(isIncrease == false && caseCount > 0){
+            caseNewCount = caseCount - 1;
          }
-
-         const phoneCoverAmount = document.getElementById("amountOfPhoneCover").innerText;
-         const phoneCoverAmountNumber = parseFloat(phoneCoverAmount);
-         const totalCoverAmount = phoneCoverAmountNumber - 59;
-         
-         document.getElementById("amountOfPhoneCover").innerText = totalCoverAmount;
-         
-      })
-
-      const addCross = document.getElementById("addCross2");
-      addCross.addEventListener('click', function(){
-         const cartRemove = document.getElementById("secondCart");
-         cartRemove.style.display = "none";
-      })
-
-      
-
-
-
+         caseInput.value = caseNewCount;
+         const caseTotal = caseNewCount * 59;
+         document.getElementById("case-total").innerText = caseTotal;
+      }
 
 
 
